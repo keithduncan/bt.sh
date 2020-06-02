@@ -41,7 +41,7 @@ bt_cleanup () {
   local init_file="${BT_INIT%%:*}"
   local caller="$(basename ${BASH_SOURCE[1]} 2>/dev/null):${BASH_LINENO[0]}"
   local caller_file="${caller%%:*}"
-  if [ "$init_file" = "$caller_file" ]; then
+  if [ "$init_file" = "$caller_file" -o "$1" = "-f" ]; then
     if [ -n "$BT_CPUSAMPLE_PID" ]; then
       kill $BT_CPUSAMPLE_PID
       wait $BT_CPUSAMPLE_PID 2>/dev/null || true
